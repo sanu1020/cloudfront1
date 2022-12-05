@@ -60,27 +60,6 @@ resource "aws_cloudfront_distribution" "s3_distribution_sanujan_2" {
   }
 }
 
-resource "aws_cloudfront_cache_policy" "default_cache_policy" {
-  name    = "default-cache-policy"
-  min_ttl = 0
-
-  parameters_in_cache_key_and_forwarded_to_origin {
-    cookies_config {
-      cookie_behavior = "none"
-    }
-
-    headers_config {
-      header_behavior = "none"
-    }
-
-    query_strings_config {
-      query_string_behavior = "none"
-    }
-
-    enable_accept_encoding_brotli = true
-    enable_accept_encoding_gzip   = true
-  }
-}
 
 output "domain_name" {
   value = aws_cloudfront_distribution.s3_distribution_sanujan_2.domain_name
