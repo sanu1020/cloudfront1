@@ -5,9 +5,7 @@ permissions:
   contents: read
 
 jobs:
-   
-    runs-on: ubuntu-latest
-    steps:
+   steps:
       - uses: actions/checkout@v3
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
