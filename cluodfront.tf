@@ -23,7 +23,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_sanujan_2" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
-   ordered_cache_behavior {
+  ordered_cache_behavior {
     path_pattern     = "/index.html"
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
