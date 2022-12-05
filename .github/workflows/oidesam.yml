@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: aws-actions/setup-sam@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::115538910247:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_Section32-Admin_3dbf492552b6f1ef
+          aws-region: ap-northeast-1
+      # sam build
+      - run: sam build --use-container
+
+# Run Unit tests- Specify unit tests here
+
+# sam deploy
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket 32-doc-classifier --capabilities CAPABILITY_IAM --region ap-northeast-1
