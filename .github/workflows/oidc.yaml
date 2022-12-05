@@ -1,27 +1,35 @@
 on: [push, workflow_dispatch]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  permissions:
-    id-token: write
-    contents: read
-  build:
-    if: github.event_name == 'push'
+  Run-npm-on-Ubuntu:
+    name: Run npm on Ubuntu
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@master
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          role-to-assume: arn:aws:iam::426371584621:role/OIDC_demo
-          aws-region: us-east-1
+          node-version: '14'
+      - run: npm help
 
-      - name: terraform init
-        run: terraform init
-      - name: terraform validate
-        run: terraform validate
-      - name: terraform plan
-        run: terraform plan
-      - name: terraform apply
-        run: terraform apply
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@master
+      with:
+        role-to-assume: arn:aws:iam::426371584621:role/OIDC_demo
+        aws-region: us-east-1
+
+    - name: terraform init
+      run: terraform init
+    - name: terraform validate
+      run: terraform validate
+    - name: terraform plan
+      run: terraform plan
+    - name: terraform apply
+      run: terraform apply
