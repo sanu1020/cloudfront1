@@ -6,13 +6,10 @@ on:
 
 
 jobs:
-  defaults:
-    run:
-      shell: bash
-  runs-on: ubuntu-latest
   permissions:
     id-token: write
     contents: read
+  runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v3
     - name: Configure AWS credentials
