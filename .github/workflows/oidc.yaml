@@ -1,17 +1,9 @@
-name: OIDC Workflow
-
-on:
-  push:
-    branches:
-      - 'main'
-    workflow_dispatch:
-
-permission:
-  id-token: write
-  contents: read
+on: [push, workflow_dispatch]
 
 jobs:
-  deploy:
+  permissions:
+    id-token: write
+    contents: read
   runs-on: ubuntu-latest
   steps:
     - name: Checkout repo
